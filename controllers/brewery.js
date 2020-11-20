@@ -1,7 +1,6 @@
 const db = require('../models')
 const axios = require('axios')
 const { response } = require('express')
-
 //API Request
 //routes to http://localhost:4000/api/v1/brewery/search?q=(INSERT QUERY)
 const apiRequest = (req,res) => {
@@ -12,15 +11,12 @@ const apiRequest = (req,res) => {
             res.json(response.data)
         })
 }
-
 const apiShow = (req,res) => {
     axios.get(`https://api.openbrewerydb.org/breweries/${req.params.id}`)
         .then(response => {
             res.json(response.data)
         })
 }
-
-
 //Find all of the brewery posts
 const index = (req, res) => {
     console.log('in the index route')
@@ -31,7 +27,6 @@ const index = (req, res) => {
         res.status(200).json({ breweries: foundBreweries})
     })
 }
-
 const show = (req, res) => {
     db.brewery.findAll({
         where: {
@@ -44,14 +39,24 @@ const show = (req, res) => {
         res.status(200).json({ brewery: foundBrewery })
     })
 }
-
+const showPost = (req, res) => {
+    db.brewery.findAll({
+        where: {
+            userId: req.params.id
+        }
+    }).then((foundUser) => {
+        if(!foundUser) return res.json({
+            message: 'User with provided ID not found.'
+        })
+        res.status(200).json({ user: foundUser })
+    })
+}
 const create = (req, res) => {
     db.brewery.create(req.body).then((savedBrewery) => {
         // Validations and error handling here
         res.status(200).json({ brewery: savedBrewery })
     })
 }
-
 const update = (req, res) => {
     db.brewery.update({
         ...req.body
@@ -67,7 +72,6 @@ const update = (req, res) => {
         res.status(200).json({ brewery: updatedBrewery })
     })
 }
-
 const destroy = (req, res) => {
     db.brewery.destroy({
         where: { id: req.params.id }
@@ -75,7 +79,6 @@ const destroy = (req, res) => {
         res.status(200)
     })
 }
-
 module.exports = {
     index,
     show,
@@ -83,5 +86,6 @@ module.exports = {
     update,
     destroy,
     apiRequest,
-    apiShow
+    apiShow,
+    showPost
 }
