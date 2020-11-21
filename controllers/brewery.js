@@ -17,6 +17,10 @@ const apiShow = (req,res) => {
             res.json(response.data)
         })
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> submain
 //Find all of the brewery posts
 const index = (req, res) => {
     console.log('in the index route')
