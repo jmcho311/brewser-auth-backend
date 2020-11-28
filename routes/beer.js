@@ -8,7 +8,7 @@ router.get('/category/:category', ctrl.show)
 router.get('/:id', ctrl.showPost)
 router.get('/breweryPost/:id', ctrl.showBrewery)
 router.get('/name/:name', ctrl.showBeer)
-// router.post('/', ctrl.create)
+router.post('/', ctrl.create)
 // router.put('/:id', ctrl.update)
 // router.delete('/:id', ctrl.destroy)
 
