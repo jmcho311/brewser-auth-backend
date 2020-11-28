@@ -44,6 +44,34 @@ const showPost = (req, res) => {
     })
 }
 
+const showBrewery = (req, res) => {
+    db.beer.findAll({
+        where: {
+            breweryId: req.params.id
+        }
+    }).then((foundBrewery) => {
+        if(!foundBrewery) return res.json({
+            message: 'Beer posts with selected breweryId not found.'
+        })
+        res.status(200).json({ brewery: foundBrewery})
+    })
+}
+
+const showBeer = (req, res) => {
+    db.beer.findAll({
+        where: {
+            name: {
+                [Op.iLike]: `${req.params.name}`
+            } 
+        }
+    }).then((foundBeer) => {
+        if(!foundBeer) return res.json({
+            message: 'Beer posts with selected beerName not found.'
+        })
+        res.status(200).json({ selectedBeer: foundBeer})
+    })
+}
+
 // const create = (req, res) => {
 //     db.beer.create(req.body).then((savedBeer) => {
 //         // Validations and error handling here
@@ -79,6 +107,8 @@ module.exports = {
     index,
     show,
     showPost,
+    showBrewery,
+    showBeer
     // create,
     // update,
     // destroy,
