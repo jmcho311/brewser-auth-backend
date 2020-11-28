@@ -72,12 +72,12 @@ const showBeer = (req, res) => {
     })
 }
 
-// const create = (req, res) => {
-//     db.beer.create(req.body).then((savedBeer) => {
-//         // Validations and error handling here
-//         res.status(200).json({ beer: savedBeer })
-//     })
-// }
+const create = (req, res) => {
+    db.beer.create(req.body).then((savedBeer) => {
+        // Validations and error handling here
+        res.status(200).json({ beer: savedBeer })
+    })
+}
 
 // const update = (req, res) => {
 //     db.beer.update({
@@ -108,8 +108,8 @@ module.exports = {
     show,
     showPost,
     showBrewery,
-    showBeer
-    // create,
+    showBeer,
+    create
     // update,
     // destroy,
 }
