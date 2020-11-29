@@ -95,13 +95,13 @@ const create = (req, res) => {
 //     })
 // }
 
-// const destroy = (req, res) => {
-//     db.beer.destroy({
-//         where: { id: req.params.id }
-//     }).then(() => {
-//         res.status(200)
-//     })
-// }
+const destroy = (req, res) => {
+    db.beer.destroy({
+        where: { id: req.params.id }
+    }).then(() => {
+        res.sendStatus(200)
+    })
+}
 
 module.exports = {
     index,
@@ -109,7 +109,7 @@ module.exports = {
     showPost,
     showBrewery,
     showBeer,
-    create
+    create,
     // update,
-    // destroy,
+    destroy,
 }
