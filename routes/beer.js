@@ -10,7 +10,7 @@ router.get('/breweryPost/:id', ctrl.showBrewery)
 router.get('/name/:name', ctrl.showBeer)
 router.post('/', ctrl.create)
 // router.put('/:id', ctrl.update)
-// router.delete('/:id', ctrl.destroy)
+router.delete('/:id', ctrl.destroy)
 
 
 module.exports = router
