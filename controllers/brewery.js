@@ -51,6 +51,20 @@ const showPost = (req, res) => {
         res.status(200).json({ user: foundUser })
     })
 }
+
+const showPostById = (req,res) => {
+    db.brewery.findAll({
+        where: {
+            id: req.params.id
+        }
+    }).then((foundPost) => {
+        if(!foundPost) return res.json({
+            message: 'Post not found.'
+        })
+        res.status(200).json({ post: foundPost })
+    })
+}
+
 const create = (req, res) => {
     db.brewery.create(req.body).then((savedBrewery) => {
         // Validations and error handling here
@@ -73,10 +87,11 @@ const update = (req, res) => {
     })
 }
 const destroy = (req, res) => {
+    console.log('req.params', req.params.id)
     db.brewery.destroy({
         where: { id: req.params.id }
     }).then(() => {
-        res.status(200)
+        res.sendStatus(200)
     })
 }
 module.exports = {
@@ -87,5 +102,6 @@ module.exports = {
     destroy,
     apiRequest,
     apiShow,
-    showPost
+    showPost,
+    showPostById
 }
