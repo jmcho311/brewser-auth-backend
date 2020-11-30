@@ -1,7 +1,6 @@
 const db = require('../models')
 const axios = require('axios')
 const { response } = require('express')
-
 //API Request
 //routes to http://localhost:4000/api/v1/brewery/search?q=(INSERT QUERY)
 const apiRequest = (req,res) => {
@@ -11,14 +10,12 @@ const apiRequest = (req,res) => {
             res.json(response.data)
         })
 }
-
 const apiShow = (req,res) => {
     axios.get(`https://api.openbrewerydb.org/breweries/${ req.params.id }`)
         .then(response => {
             res.json(response.data)
         })
 }
-
 //Find all of the brewery posts
 const index = (req, res) => {
     db.brewery.findAll().then((foundBreweries) => {
@@ -28,7 +25,6 @@ const index = (req, res) => {
         res.status(200).json({ breweries: foundBreweries })
     })
 }
-
 const show = (req, res) => {
     db.brewery.findAll({
         where: {
@@ -41,7 +37,6 @@ const show = (req, res) => {
         res.status(200).json({ brewery: foundBrewery })
     })
 }
-
 const showPost = (req, res) => {
     db.brewery.findAll({
         where: {
@@ -98,7 +93,6 @@ const destroy = (req, res) => {
         res.sendStatus(200)
     })
 }
-
 module.exports = {
     index,
     show,
