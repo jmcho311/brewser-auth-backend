@@ -11,7 +11,7 @@ router.get('/:id', ctrl.show)
 router.get('/userPost/:id', ctrl.showPost)
 router.get('/posts/:id', ctrl.showPostById)
 router.post('/', ctrl.create)
-router.put('/:id', ctrl.update)
+// router.put('/:id', ctrl.update)
 router.delete('/posts/:id', ctrl.destroy)
 
 
