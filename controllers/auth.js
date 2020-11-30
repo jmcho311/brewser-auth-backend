@@ -25,14 +25,12 @@ const register = (req, res) => {
         email,
         password
       }).then(newUser => {
-        console.log('New user created!')
         res.json(newUser)
       })
     })
 }
 
 const index = (req, res) => {
-  console.log(req.params.id)
   db.user.findAll({
     where: {
       id: req.params.id
