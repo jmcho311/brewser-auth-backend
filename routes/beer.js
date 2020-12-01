@@ -2,7 +2,7 @@ const router = require('express').Router()
 const ctrl = require('../controllers/beer')
 
 
-// PATH = /api/v1/auth
+// PATH = /api/v1/beer
 router.get('/', ctrl.index)
 router.get('/category/:category', ctrl.show)
 router.get('/:id', ctrl.showPost)

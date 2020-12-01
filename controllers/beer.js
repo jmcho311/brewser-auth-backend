@@ -3,22 +3,19 @@ const { Op } = require("sequelize")
 
 //Find all of the brewery posts
 const index = (req, res) => {
-    console.log('in the index route')
     db.beer.findAll().then((foundBeers) => {
         if(!foundBeers) return res.json({
             message: 'No Beers found in database.'
         })
-        res.status(200).json({ beers: foundBeers})
+        res.status(200).json({ beers: foundBeers })
     })
 }
 
 const show = (req, res) => {
-    // if(req.params.category === )...ignore special characters
-    console.log('*******'+req.params.category)
     db.beer.findAll({
         where: {
             category: {
-                [Op.iLike]: `${req.params.category}`
+                [Op.iLike]: `${ req.params.category }`
             }
         }
     }).then((foundBeers) => {
@@ -31,7 +28,6 @@ const show = (req, res) => {
 
 
 const showPost = (req, res) => {
-    console.log(req.params.id)
     db.beer.findAll({
         where: {
             userId: req.params.id
@@ -53,7 +49,7 @@ const showBrewery = (req, res) => {
         if(!foundBrewery) return res.json({
             message: 'Beer posts with selected breweryId not found.'
         })
-        res.status(200).json({ brewery: foundBrewery})
+        res.status(200).json({ brewery: foundBrewery })
     })
 }
 
@@ -61,20 +57,19 @@ const showBeer = (req, res) => {
     db.beer.findAll({
         where: {
             name: {
-                [Op.iLike]: `${req.params.name}`
+                [Op.iLike]: `${ req.params.name }`
             } 
         }
     }).then((foundBeer) => {
         if(!foundBeer) return res.json({
             message: 'Beer posts with selected beerName not found.'
         })
-        res.status(200).json({ selectedBeer: foundBeer})
+        res.status(200).json({ selectedBeer: foundBeer })
     })
 }
 
 const create = (req, res) => {
     db.beer.create(req.body).then((savedBeer) => {
-        // Validations and error handling here
         res.status(200).json({ beer: savedBeer })
     })
 }
