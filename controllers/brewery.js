@@ -75,21 +75,26 @@ const create = (req, res) => {
     })
 }
 
-// const update = (req, res) => {
-//     db.brewery.update({
-//         ...req.body
-//     }, {
-//         where: {
-//         id: req.params.id
-//         }
-//     }).then((updatedBrewery) => {
-//         if (!updatedBrewery) return res.json({
-//             message: "No brewery with that ID found."
-//         })
-//         // Validations and error handling here
-//         res.status(200).json({ brewery: updatedBrewery })
-//     })
-// }
+const update = (req, res) => {
+    console.log(req.body)
+    db.brewery.update({
+        ...req.body
+    }, {
+        returning: true,
+        where: {
+        id: req.params.id
+        }
+    // }).then(([ rowsUpdate, [updatedBrewery] ]) => {
+    }).then(function(updatedBrewery) {
+        if (!updatedBrewery) return res.json({
+            message: "No brewery with that ID found."
+        })
+        // Validations and error handling here
+        res.status(200).json({ brewery: updatedBrewery })
+    }).catch(error => {
+        console.log(error)
+    })
+}
 
 const destroy = (req, res) => {
     db.brewery.destroy({
@@ -103,7 +108,7 @@ module.exports = {
     index,
     show,
     create,
-    // update,
+    update,
     destroy,
     apiRequest,
     apiShow,
